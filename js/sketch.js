@@ -5,14 +5,14 @@ function preload() {
 }
 
 function setup() {
-  let canvas = createCanvas(1000, 1000, WEBGL);
+  let canvas = createCanvas(900, 900, WEBGL);
   canvas.elt.oncontextmenu = () => false;
 
   easyCam = createEasyCam({distance: 300});
 
   earth = new Planet(50, 0, 0, earthTexture);
-  earth.generateSatellites(5);
-  earth.generateParticles();
+  // earth.generateSatellites(5);
+  earth.generateParticles(100);
 }
 
 function draw() {

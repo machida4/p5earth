@@ -5,7 +5,7 @@ class Planet {
     this.radius = radius;
     this.distance = distance;
     this.v.mult(this.distance);
-    this.angle = random(TWO_PI);
+    this.angle = 0; 
     this.orbitspeed = orbitspeed;
     this.texture = texture;
 
@@ -39,7 +39,6 @@ class Planet {
 
   orbit() {
     this.angle = this.angle + this.orbitspeed;
-    console.log(this.angle);
     for (let i = 0; i < this.planets.length; i++) {
       this.planets[i].orbit();
     }
@@ -50,13 +49,29 @@ class Planet {
 
     for (let i = 0; i < count; i++) {
       let radius = random(this.radius / 3, this.radius / 6);
-      let distance = random(this.radius + radius, (this.radius + radius) * 2);
+      let distance = random(this.radius + radius * 2 , (this.radius + radius) * 2);
       let orbitspeed = random(-0.05, 0.05);
       this.planets[i] = new Planet(radius, distance, orbitspeed, this.texture);
     }
   }
 
   generateParticles(count) {
+    this.particles = [];
 
+    for (let i = 0; i < count; i++) {
+      let radius = random(this.radius / 15);
+      let distance = random(this.radius * 2.5, this.radius * 2.6);
+      let orbitspeed = random(0.008, 0.01); 
+      if (Math.floor(random() * 2) == 0) {
+        orbitspeed *= -1;
+      }
+      this.planets[i] = new Planet(radius, distance, orbitspeed, this.texture);
+    }
+  }
+}
+
+class Particle extends Planet {
+  constructor(count) {
+    super(count);
   }
 }
