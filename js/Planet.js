@@ -1,13 +1,12 @@
 class Planet {
   constructor(radius, distance, orbitspeed, texture) {
-    this.v = p5.Vector.random3D();
-
     this.radius = radius;
     this.distance = distance;
-    this.v.mult(this.distance);
     this.angle = random(TWO_PI); 
     this.orbitspeed = orbitspeed;
     this.texture = texture;
+
+    this.v = p5.Vector.random3D().mult(this.distance);
 
     this.satellites = [];
     this.particles = [];
@@ -57,8 +56,8 @@ class Planet {
     this.satellites = [];
 
     for (let i = 0; i < count; i++) {
-      let radius = random(this.radius / 3, this.radius / 6);
-      let distance = random(this.radius + radius * 2 , (this.radius + radius) * 2);
+      let radius = random(this.radius / 2.5, this.radius / 1.5);
+      let distance = random(this.radius + radius * 6 , (this.radius + radius) * 6);
       let orbitspeed = random(-0.05, 0.05);
       this.satellites[i] = new Planet(radius, distance, orbitspeed, this.texture);
     }
@@ -82,6 +81,6 @@ class Planet {
 class Particle extends Planet {
   constructor(radius, distance, orbitspeed, texture) {
     super(radius, distance, orbitspeed, texture);
-    this.v = new p5.Vector(0.15, random(0.08, 0.1), 0.0).normalize();
+    this.v = new p5.Vector(0.15, random(0.08, 0.1), 0.0).normalize().mult(this.distance);
   }
 }
