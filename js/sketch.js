@@ -5,7 +5,7 @@ function preload() {
 }
 
 function setup() {
-  let canvas = createCanvas(900, 900, WEBGL);
+  let canvas = createCanvas(window.innerWidth, window.innerHeight - 10, WEBGL);
   canvas.elt.oncontextmenu = () => false;
 
   easyCam = createEasyCam({distance: 300});
@@ -24,3 +24,4 @@ function draw() {
   earth.show();
   earth.orbit();
 }
+

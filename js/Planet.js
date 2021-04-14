@@ -84,3 +84,4 @@ class Particle extends Planet {
     this.v = new p5.Vector(0.15, random(0.08, 0.1), 0.0).normalize().mult(this.distance);
   }
 }
+
