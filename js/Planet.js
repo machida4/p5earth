@@ -5,11 +5,11 @@ class Planet {
     this.radius = radius;
     this.distance = distance;
     this.v.mult(this.distance);
-    this.angle = 0; 
+    this.angle = random(TWO_PI); 
     this.orbitspeed = orbitspeed;
     this.texture = texture;
 
-    this.planets = [];
+    this.satellites = [];
     this.particles = [];
   }
 
@@ -30,8 +30,12 @@ class Planet {
     texture(this.texture);
     sphere(this.radius);
 
-    for (let i = 0; i < this.planets.length; i++) {
-      this.planets[i].show();
+    for (let i = 0; i < this.satellites.length; i++) {
+      this.satellites[i].show();
+    }
+
+    for (let i = 0; i < this.particles.length; i++) {
+      this.particles[i].show();
     }
 
     pop();
@@ -39,19 +43,24 @@ class Planet {
 
   orbit() {
     this.angle = this.angle + this.orbitspeed;
-    for (let i = 0; i < this.planets.length; i++) {
-      this.planets[i].orbit();
+
+    for (let i = 0; i < this.satellites.length; i++) {
+      this.satellites[i].orbit();
+    }
+
+    for (let i = 0; i < this.particles.length; i++) {
+      this.particles[i].orbit();
     }
   }
 
   generateSatellites(count) {
-    this.planets = [];
+    this.satellites = [];
 
     for (let i = 0; i < count; i++) {
       let radius = random(this.radius / 3, this.radius / 6);
       let distance = random(this.radius + radius * 2 , (this.radius + radius) * 2);
       let orbitspeed = random(-0.05, 0.05);
-      this.planets[i] = new Planet(radius, distance, orbitspeed, this.texture);
+      this.satellites[i] = new Planet(radius, distance, orbitspeed, this.texture);
     }
   }
 
@@ -65,13 +74,14 @@ class Planet {
       if (Math.floor(random() * 2) == 0) {
         orbitspeed *= -1;
       }
-      this.planets[i] = new Planet(radius, distance, orbitspeed, this.texture);
+      this.particles[i] = new Particle(radius, distance, orbitspeed, this.texture);
     }
   }
 }
 
 class Particle extends Planet {
-  constructor(count) {
-    super(count);
+  constructor(radius, distance, orbitspeed, texture) {
+    super(radius, distance, orbitspeed, texture);
+    this.v = new p5.Vector(0.15, random(0.08, 0.1), 0.0).normalize();
   }
 }

@@ -11,8 +11,8 @@ function setup() {
   easyCam = createEasyCam({distance: 300});
 
   earth = new Planet(50, 0, 0, earthTexture);
-  // earth.generateSatellites(5);
-  earth.generateParticles(100);
+  earth.generateSatellites(2);
+  earth.generateParticles(300);
 }
 
 function draw() {
