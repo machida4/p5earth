@@ -1,4 +1,4 @@
-// let easyCam;
+let easyCam;
 
 function preload() {
   earthTexture = loadImage('images/stretched_icon.png');
@@ -10,7 +10,7 @@ function setup() {
   canvas.style('z-index', '-1');
   canvas.elt.oncontextmenu = () => false;
 
-  // easyCam = createEasyCam({distance: 300});
+  easyCam = createEasyCam({distance: 300});
 
   earth = new Planet(50, 0, 0, earthTexture);
   earth.generateSatellites(2);
